@@ -25,14 +25,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # إضافة خطوة لضمان تحديث الـ Wrapper
-      - name: Update Gradle Wrapper
-        run: ./gradlew wrapper --gradle-version 8.9
-        working-directory: android
-
       - name: Build APK
+        # هذا الأمر سيستخدم الـ Gradle الموجود في مشروعك مباشرة
         run: flutter build apk --release --no-tree-shake-icons
-        working-directory: .
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
