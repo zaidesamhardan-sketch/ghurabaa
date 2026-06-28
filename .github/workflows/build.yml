@@ -25,11 +25,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Clean Project
-        run: flutter clean
+      # إضافة خطوة لضمان تحديث الـ Wrapper
+      - name: Update Gradle Wrapper
+        run: ./gradlew wrapper --gradle-version 8.9
+        working-directory: android
 
       - name: Build APK
         run: flutter build apk --release --no-tree-shake-icons
+        working-directory: .
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
